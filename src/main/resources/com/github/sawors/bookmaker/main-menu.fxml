@@ -100,7 +100,7 @@
                   </Text>
                </children>
           </AnchorPane>
-            <Pane fx:id="layer_generating" prefHeight="400.0" prefWidth="640.0">
+            <Pane fx:id="layer_generating" prefHeight="400.0" prefWidth="640.0" visible="false">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="200.0" layoutX="128.0" layoutY="144.0" stroke="BLACK" strokeType="INSIDE" width="385.0" />
                   <ProgressBar fx:id="progressbar" layoutX="142.0" layoutY="187.0" prefHeight="18.0" prefWidth="359.0" progress="0.0" />
@@ -120,6 +120,11 @@
                   <TextArea fx:id="progressoutput" layoutX="222.0" layoutY="209.0" prefHeight="92.0" prefWidth="200.0" />
                </children>
             </Pane>
+            <AnchorPane layoutX="553.0" prefHeight="400.0" prefWidth="344.0">
+               <children>
+                  <Button layoutX="32.0" layoutY="44.0" mnemonicParsing="false" onAction="#testPress" text="Test" />
+               </children>
+            </AnchorPane>
          </children>
       </Pane>
   </children>

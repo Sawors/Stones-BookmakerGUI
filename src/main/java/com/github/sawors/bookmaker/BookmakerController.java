@@ -7,6 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
@@ -14,11 +18,17 @@ import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+import org.apache.pdfbox.pdmodel.*;
+import org.apache.pdfbox.rendering.*;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-
-import java.awt.Desktop;
 
 public class BookmakerController {
     public TextField fieldbookname;
@@ -161,6 +171,83 @@ public class BookmakerController {
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+    
+    }
+    
+    public void testPress(ActionEvent actionEvent) {
+        ArrayList<BufferedImage> singleimagelist = new ArrayList<>();
+        int horizontalsize = 800;
+        int verticalsize = (int) (1.5*horizontalsize);
+        File inputpdf = new File("C:\\Users\\sosol\\IdeaProjects\\bookmaker\\test\\LTDT.pdf");
+        File output = new File("");
+        
+    try{
+        PDDocument test = PDDocument.load(inputpdf);
+        PDFRenderer pr = new PDFRenderer (test);
+        
+        for(int i=0; i<test.getNumberOfPages(); i++){
+            System.out.println(i);
+            BufferedImage img0 = pr.renderImageWithDPI(i, 300);
+            System.out.println("rendered : "+(i+1));
+            int cropedheight = (int) (img0.getWidth()*1.5);
+            int padding = (img0.getHeight()-cropedheight)/2;
+    
+            BufferedImage img = img0.getSubimage(0, padding, img0.getWidth(), img0.getHeight()-padding); //fill in the corners of the desired crop location here
+            BufferedImage copyOfImage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+    
+            Graphics2D g = copyOfImage.createGraphics();
+            g.drawImage(img, 0, 0, null);
+            g.dispose();
+    
+            ImageFilter filter = new RGBImageFilter() {
+                public int filterRGB(int x, int y, int rgb) {
+                    if(rgb >= 0xFFb3b3b3){
+                        return 0x00000000;
+                    } else {
+                        return rgb;
+                    }
+                }
+            };
+    
+            final ImageProducer imp = new FilteredImageSource(copyOfImage.getSource(), filter);
+            Image tempimg = Toolkit.getDefaultToolkit().createImage(imp);
+            BufferedImage buffimg = new BufferedImage(copyOfImage.getWidth(), copyOfImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D imgtobuff = buffimg.createGraphics();
+            imgtobuff.scale(800f/copyOfImage.getWidth(), 1200f/copyOfImage.getHeight());
+            imgtobuff.drawImage(tempimg,0,0,null);
+            imgtobuff.dispose();
+    
+            BufferedImage outputimg = buffimg.getSubimage(0,0,800,1200);
+            Graphics g2 = outputimg.createGraphics();
+            g2.drawImage(outputimg, 0,0,null);
+    
+            singleimagelist.add(outputimg);
+            
+        }
+        
+        int count = 1;
+        for(int i=0; i<singleimagelist.size(); i+=2){
+            BufferedImage imgleft = singleimagelist.get(i);
+            BufferedImage imgright;
+            if(singleimagelist.size() > i+1){
+                imgright = singleimagelist.get(i+1);
+            } else {
+                imgright = new BufferedImage(800, 1200, BufferedImage.TYPE_INT_ARGB);
+            }
+            
+            BufferedImage finalimg = new BufferedImage(1600, 1200, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D grph = finalimg.createGraphics();
+            grph.drawImage(imgleft, 0,0,null);
+            grph.drawImage(imgright, 800,0,null);
+            
+            ImageIO.write(finalimg, "png", new File("C:\\Users\\sosol\\IdeaProjects\\bookmaker\\test\\"+count+".png"));
+            count++;
+        }
+        
+        Platform.exit();
+    } catch (IOException exception) {
+        exception.printStackTrace();
+    }
     
     }
 }
