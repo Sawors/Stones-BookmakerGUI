@@ -209,7 +209,7 @@ public class FromPDFController {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(BookmakerApplication.class.getResource("from-pdf.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 640, 400);
-            stage.setTitle("Stones Bookmaker v0.1");
+            stage.setTitle("Stones Bookmaker v1.0");
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
