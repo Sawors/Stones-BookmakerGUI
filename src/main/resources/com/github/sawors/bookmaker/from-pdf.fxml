@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.*?>
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.sawors.bookmaker.controllers.FromPDFController">
+  <children>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+          <AnchorPane fx:id="layer_base" maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="640.0">
+            <children>
+                <Label alignment="CENTER" focusTraversable="false" layoutX="203.0" layoutY="106.0" prefHeight="38.0" prefWidth="234.0" text="Book Name" textAlignment="CENTER" textFill="#404040">
+                    <font>
+                        <Font name="Rubik-Bold" size="24.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="fieldbookname" alignment="BOTTOM_LEFT" layoutX="194.0" layoutY="144.0" onAction="#nameinput" prefHeight="6.0" prefWidth="300.0" promptText="Input your book name" style="-fx-background-radius: 0 2 2 0;">
+                    <font>
+                        <Font name="Rubik-Bold" size="11.0" />
+                    </font>
+                </TextField>
+                <Label alignment="CENTER" focusTraversable="false" layoutX="202.0" layoutY="183.0" prefHeight="38.0" prefWidth="234.0" text="PDF Source" textAlignment="CENTER" textFill="#404040">
+                    <font>
+                        <Font name="Rubik-Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" focusTraversable="false" layoutX="202.0" layoutY="272.0" prefHeight="38.0" prefWidth="234.0" text="Target Directory" textAlignment="CENTER" textFill="#404040">
+                    <font>
+                        <Font name="Rubik-Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Pane layoutX="139.0" layoutY="297.0" prefHeight="43.0" prefWidth="359.0">
+                    <children>
+                        <Button fx:id="buttonbrowse" focusTraversable="false" layoutY="9.0" mnemonicParsing="false" onAction="#browseclick" prefHeight="9.0" prefWidth="57.0" style="-fx-background-radius: 2 0 0 2;" text="browse" textFill="#595959">
+                            <font>
+                                <Font name="Rubik-Bold" size="11.0" />
+                            </font>
+                        </Button>
+                        <TextField fx:id="fieldtarget" focusTraversable="false" layoutX="54.0" layoutY="9.0" onAction="#directoryinput" prefHeight="5.0" prefWidth="300.0" promptText="Leave blank to generate here" style="-fx-background-radius: 0 2 2 0;">
+                            <font>
+                                <Font name="Rubik-Bold" size="11.0" />
+                            </font>
+                        </TextField>
+                    </children>
+                </Pane>
+                <Label fx:id="title" alignment="CENTER" focusTraversable="false" layoutX="140.0" layoutY="32.0" prefHeight="43.0" prefWidth="359.0" text="Stones Book Maker" textAlignment="CENTER" textFill="#404040">
+                    <font>
+                        <Font name="Rubik-Bold" size="36.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="fieldbooknameprefix" alignment="CENTER" focusTraversable="false" layoutX="140.0" layoutY="144.0" onAction="#prefixinput" prefHeight="2.0" prefWidth="54.0" promptText="prefix" style="-fx-background-radius: 2 0 0 2;">
+                    <font>
+                        <Font name="Rubik-Bold" size="11.0" />
+                    </font>
+                </TextField>
+                  <Button focusTraversable="false" layoutX="22.0" layoutY="22.0" mnemonicParsing="false" onAction="#gotomenu" text="🡄 Go Back" textFill="#4d4d4d">
+                     <font>
+                        <Font name="Rubik-Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="buttonpdfgenerate" focusTraversable="false" layoutX="276.0" layoutY="344.0" mnemonicParsing="false" onAction="#startPDFGeneration" text="Generate">
+                     <font>
+                        <Font name="Rubik-Bold" size="14.0" />
+                     </font></Button>
+                  <Button fx:id="buttonbrowsesource" focusTraversable="false" layoutX="139.0" layoutY="221.0" mnemonicParsing="false" onAction="#browsesourceclick" prefHeight="26.0" prefWidth="57.0" style="-fx-background-radius: 2 0 0 2;" text="browse" textFill="#595959">
+                     <font>
+                        <Font name="Rubik-Bold" size="11.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="fieldsource" focusTraversable="false" layoutX="194.0" layoutY="221.0" prefHeight="26.0" prefWidth="300.0" promptText="Leave blank to generate here" style="-fx-background-radius: 0 2 2 0;">
+                     <font>
+                        <Font name="Rubik-Bold" size="11.0" />
+                     </font>
+                  </TextField>
+                  <Pane fx:id="advancedpane" layoutX="496.0" layoutY="158.0" prefHeight="164.0" prefWidth="142.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="147.0" layoutX="4.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="134.0" />
+                        <CheckBox fx:id="checkboxonlyselected" layoutX="8.0" layoutY="6.0" mnemonicParsing="false" onAction="#checkOnlySelection" text="Only selected pages">
+                           <font>
+                              <Font name="Rubik-Bold" size="10.0" />
+                           </font>
+                        </CheckBox>
+                        <TextField fx:id="fieldfrom" alignment="CENTER" layoutX="8.0" layoutY="24.0" prefHeight="22.0" prefWidth="63.0" promptText="from" style="-fx-background-radius: 2 0 0 2;">
+                           <font>
+                              <Font name="Rubik-Bold" size="11.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="fieldto" alignment="CENTER" layoutX="71.0" layoutY="24.0" prefHeight="22.0" prefWidth="63.0" promptText="to" style="-fx-background-radius: 0 2 2 0;">
+                           <font>
+                              <Font name="Rubik-Bold" size="11.0" />
+                           </font>
+                        </TextField>
+                        <CheckBox fx:id="checkboxscale" layoutX="8.0" layoutY="56.0" mnemonicParsing="false" onAction="#checkScale" text="Scale Pages" textFill="#4d4d4d">
+                           <font>
+                              <Font name="Rubik-Bold" size="10.0" />
+                           </font>
+                        </CheckBox>
+                        <TextField fx:id="fieldscale" alignment="CENTER" layoutX="8.0" layoutY="74.0" prefHeight="22.0" prefWidth="126.0" promptText="Scale">
+                           <font>
+                              <Font name="Rubik-Bold" size="11.0" />
+                           </font>
+                        </TextField>
+                        <Line endX="4.0" layoutY="75.0" startX="-2.0" />
+                        <CheckBox fx:id="checkboxtolerance" layoutX="8.0" layoutY="104.0" mnemonicParsing="false" onAction="#checkTolerance" text="Tolerance" textFill="#4d4d4d">
+                           <font>
+                              <Font name="Rubik-Bold" size="10.0" />
+                           </font>
+                        </CheckBox>
+                        <TextField fx:id="fieldtolerance" alignment="CENTER" focusTraversable="false" layoutX="8.0" layoutY="122.0" prefHeight="21.0" prefWidth="126.0" promptText="0.0 - 1.0">
+                           <font>
+                              <Font name="Rubik-Bold" size="10.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </Pane>
+                  <CheckBox fx:id="advancedgen" layoutX="249.0" layoutY="250.0" mnemonicParsing="false" onAction="#checkAdvancedGen" text="Advanced Generation" textFill="#4d4d4d">
+                     <font>
+                        <Font name="Rubik-Bold" size="11.0" />
+                     </font>
+                  </CheckBox>
+                  <Text fx:id="errortext" layoutX="203.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error Text PlaceHolder" textAlignment="CENTER" wrappingWidth="234.39999999999986">
+                     <font>
+                        <Font name="Rubik-Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <CheckBox fx:id="checkboxonlytextures" focusTraversable="false" layoutX="369.0" layoutY="350.0" mnemonicParsing="false" text="Only Textures" textFill="#4d4d4d">
+                     <font>
+                        <Font name="Rubik-Bold" size="10.0" />
+                     </font>
+                  </CheckBox>
+            </children>
+          </AnchorPane>
+            <Pane fx:id="layer_generating" prefHeight="400.0" prefWidth="640.0" visible="false">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="200.0" layoutX="128.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="385.0" />
+                  <ProgressBar fx:id="progressbar" layoutX="142.0" layoutY="143.0" prefHeight="18.0" prefWidth="359.0" progress="0.0" />
+                  <Label alignment="CENTER" layoutX="259.0" layoutY="116.0" prefHeight="17.0" prefWidth="125.0" text="Progress" textAlignment="CENTER" textFill="#404040">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="buttonanotherbook" focusTraversable="false" layoutX="392.0" layoutY="265.0" mnemonicParsing="false" onAction="#continuePress" text="Continue" textFill="#404040" />
+                  <Button fx:id="buttonexit" focusTraversable="false" layoutX="466.0" layoutY="265.0" mnemonicParsing="false" onAction="#exitPress" text="Exit" textFill="#404040" />
+                  <Button fx:id="buttonopendir" cancelButton="true" focusTraversable="false" layoutX="142.0" layoutY="265.0" mnemonicParsing="false" onAction="#openDirPress" text="Open Directory" textFill="#404040" />
+                  <Text fx:id="progresstext" layoutX="221.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="200.79199981689453">
+                     <font>
+                        <Font name="Rubik Italic" size="11.0" />
+                     </font>
+                  </Text>
+                  <TextArea fx:id="progressoutput" layoutX="222.0" layoutY="165.0" prefHeight="92.0" prefWidth="200.0" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+  </children>
+</VBox>
