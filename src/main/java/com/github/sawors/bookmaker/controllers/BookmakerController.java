@@ -155,7 +155,7 @@ public class BookmakerController {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(BookmakerApplication.class.getResource("main-menu.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 640, 400);
-            stage.setTitle("Stones Bookmaker v1.0");
+            stage.setTitle("Stones Bookmaker v1.1");
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();

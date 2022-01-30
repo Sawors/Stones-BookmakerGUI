@@ -181,7 +181,7 @@
                         <Font name="Rubik Italic" size="11.0" />
                      </font>
                   </Text>
-                  <TextArea fx:id="progressoutput" layoutX="222.0" layoutY="165.0" prefHeight="92.0" prefWidth="200.0" />
+                  <TextArea fx:id="progressoutput" editable="false" focusTraversable="false" layoutX="222.0" layoutY="165.0" prefHeight="92.0" prefWidth="200.0" />
                </children>
             </Pane>
          </children>

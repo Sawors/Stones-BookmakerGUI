@@ -67,6 +67,7 @@ public class FromPDFController {
         fieldscale.setDisable(true);
         fieldtolerance.setDisable(true);
         fieldtolerance.setText("0.2");
+        fieldscale.setText("0.6");
     }
     
     public void gotomenu(ActionEvent actionEvent) {
@@ -106,8 +107,8 @@ public class FromPDFController {
         boolean doselection = checkboxonlyselected.isSelected();
         boolean doscale = checkboxscale.isSelected();
         boolean dotolerance = checkboxtolerance.isSelected();
-        float tolerance = 0.3f;
-        double scale = 1;
+        float tolerance = 0.2f;
+        double scale = 0.6;
         int from = -1;
         int to = -1;
         
@@ -209,7 +210,7 @@ public class FromPDFController {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(BookmakerApplication.class.getResource("from-pdf.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 640, 400);
-            stage.setTitle("Stones Bookmaker v1.0");
+            stage.setTitle("Stones Bookmaker v1.1");
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();

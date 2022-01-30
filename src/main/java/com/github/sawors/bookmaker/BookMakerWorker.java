@@ -222,7 +222,6 @@ public class BookMakerWorker {
                         +doublepagenumber*2 // doublepages n.cit + n.properties
                         +(finalto+1-finalfrom)*2 // singlepage render + singlepage formatting
                         +(finalto+1-finalfrom)/2 // composing double pages
-                        +(finalto+1-finalfrom)/2 // formatting double pages
                         +(finalto+1-finalfrom)/2 // writing double pages
                             ;
         final int[] donetasks = {0};
@@ -236,7 +235,7 @@ public class BookMakerWorker {
     
         
     
-        System.out.println('\n'+ "Starting the creation of book \"" + bookname + "\" with " + doublepagenumber + "double pages...");
+        System.out.println('\n'+ "Generating \"" + bookname + "\" with " + doublepagenumber + "double pages...");
         //progressoutput.setText();
         
         new File(modelpath).mkdirs();
@@ -354,7 +353,7 @@ public class BookMakerWorker {
                     donetasks[0]++;
                     Platform.runLater(() -> {
                         progresstext.setText("rendering page "+ finalI);
-                        progressoutput.appendText("\nrendering page "+ finalI);
+                        progressoutput.appendText("\nrendering page "+ finalI+"...");
                     });
                     progressbar.setProgress((float) donetasks[0] / totaltasks);
                     
@@ -398,13 +397,7 @@ public class BookMakerWorker {
                     g.dispose();
                     System.out.println("Step 2");
     
-    
-    
                     donetasks[0]++;
-                    Platform.runLater(() -> {
-                        progresstext.setText("formatting page "+ finalI);
-                        progressoutput.appendText("\nformatting page "+ finalI);
-                    });
                     progressbar.setProgress((float) donetasks[0] / totaltasks);
                     
                     ImageFilter filter = new RGBImageFilter() {
@@ -438,10 +431,11 @@ public class BookMakerWorker {
                 //      COMPOSING DOUBLE PAGES
                 for (int i = 0; i < singleimagelist.size(); i += 2) {
                     final int finalI = i;
+                    int finalCount = count;
                     donetasks[0]++;
                     Platform.runLater(() -> {
-                        progresstext.setText("composing double page "+ finalI);
-                        progressoutput.appendText("\ncomposing double page "+ finalI);
+                        progresstext.setText("composing double page "+ finalCount);
+                        progressoutput.appendText("\ncomposing double page "+ finalCount+"...");
                     });
                     progressbar.setProgress((float) donetasks[0] / totaltasks);
                     BufferedImage imgleft = singleimagelist.get(i);
@@ -459,13 +453,6 @@ public class BookMakerWorker {
                     grph.dispose();
                     System.out.println("Step 8");
     
-    
-    
-                    donetasks[0]++;
-                    Platform.runLater(() -> {
-                        progresstext.setText("formatting double page "+ finalI);
-                        progressoutput.appendText("\nformatting double page "+ finalI);
-                    });
                     progressbar.setProgress((float) donetasks[0] / totaltasks);
                     
                     int[] palette = { 0xffffffff, 0xffababab, 0xff808080, 0xff545454,0xff2b2b2b, 0xff000000};
@@ -484,8 +471,8 @@ public class BookMakerWorker {
                     
                     donetasks[0]++;
                     Platform.runLater(() -> {
-                        progresstext.setText("writing double page "+ finalI);
-                        progressoutput.appendText("\nwriting double page "+ finalI);
+                        progresstext.setText("writing double page "+ finalCount);
+                        progressoutput.appendText("\nwriting double page "+ finalCount+"...");
                     });
                     progressbar.setProgress((float) donetasks[0] / totaltasks);
                     
